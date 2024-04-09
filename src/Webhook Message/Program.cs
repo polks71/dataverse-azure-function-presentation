@@ -24,6 +24,7 @@ var host = new HostBuilder()
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         services.AddMemoryCache();
+        services.AddLogging();
         services.AddSingleton<IOrganizationService, ServiceClient>(provider =>
         {
             var appid = provider.GetService<IConfiguration>().GetValue<string>("registeredappid");
@@ -41,7 +42,7 @@ var host = new HostBuilder()
 
 host.Run();
 
-
+//Authentication using AppId and Secret
 async Task<string> GetDataverseToken(string environment, string appid, string appsecret, string tenantid, IMemoryCache cache)
 {
     var accessToken = await cache.GetOrCreateAsync(environment, async (cacheEntry) => {

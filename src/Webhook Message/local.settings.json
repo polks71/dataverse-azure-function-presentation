@@ -6,6 +6,7 @@
     "registeredappid": "check secrets",
     "tenantid": "check secrets",
     "registeredappsecret": "check secrets",
-    "dataverseUrl" : "checksecrets"
+    "dataverseUrl": "checksecrets",
+    "expectedOrg": "orgdccf84be"
   }
 }
