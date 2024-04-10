@@ -37,6 +37,7 @@ namespace ServiceBusMessages
             {
                 log.LogInformation($"InvocationId: {executionContext.InvocationId} QueueMessage: {message.Body}");
 
+                //validate the message orginated form the expected Dataverse Organization
                 if (message.ApplicationProperties.ContainsKey("http://schemas.microsoft.com/xrm/2011/Claims/Organization"))
                 {
                     var orgValue = (string)message.ApplicationProperties["http://schemas.microsoft.com/xrm/2011/Claims/Organization"];
@@ -56,6 +57,7 @@ namespace ServiceBusMessages
                     log.LogWarning("Missing Org Header Value");
                     await messageActions.DeadLetterMessageAsync(message);
                 }
+                //log Message properties for demostration
                 if (message.ApplicationProperties.ContainsKey("http://schemas.microsoft.com/xrm/2011/Claims/User"))
                     log.LogInformation($"User: {(string)message.ApplicationProperties["http://schemas.microsoft.com/xrm/2011/Claims/User"]}");
 
@@ -70,9 +72,9 @@ namespace ServiceBusMessages
 
                 if (message.ApplicationProperties.ContainsKey("http://schemas.microsoft.com/xrm/2011/Claims/InitiatingUserAgent"))
                     log.LogInformation($"InitiatingUserAgent: {(string)message.ApplicationProperties["http://schemas.microsoft.com/xrm/2011/Claims/InitiatingUserAgent"]}");
-
+                //Validate if the max message size was exceeded for down stream processes
                 var messageDataExeeded = false;
-                if (message.ApplicationProperties.Keys.Any(ap => ap.Contains("MessageMaxSizeExceeded ")))
+                if (message.ApplicationProperties.Keys.Any(ap => ap.Contains("MessageMaxSizeExceeded")))
                 {
                     log.LogWarning("MessageMaxSizeExceeded");
                     messageDataExeeded = true;

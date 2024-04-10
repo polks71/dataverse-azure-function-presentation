@@ -56,6 +56,7 @@ namespace ServiceBusMessages
                     log.LogWarning("Missing Org Header Value");
                     await messageActions.DeadLetterMessageAsync(message);
                 }
+                //log Message properties for demonstration
                 if (message.ApplicationProperties.ContainsKey("http://schemas.microsoft.com/xrm/2011/Claims/User"))
                     log.LogInformation($"User: {(string)message.ApplicationProperties["http://schemas.microsoft.com/xrm/2011/Claims/User"]}");
 
@@ -72,7 +73,7 @@ namespace ServiceBusMessages
                     log.LogInformation($"InitiatingUserAgent: {(string)message.ApplicationProperties["http://schemas.microsoft.com/xrm/2011/Claims/InitiatingUserAgent"]}");
 
                 var messageDataExeeded = false;
-                if (message.ApplicationProperties.Keys.Any(ap => ap.Contains("MessageMaxSizeExceeded ")))
+                if (message.ApplicationProperties.Keys.Any(ap => ap.Contains("MessageMaxSizeExceeded")))
                 {
                     log.LogWarning("MessageMaxSizeExceeded");
                     messageDataExeeded = true;
