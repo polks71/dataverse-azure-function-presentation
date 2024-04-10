@@ -17,19 +17,19 @@ namespace DataverseAzureFunctionsCommon.Dataverse.Model
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		[OptionSetMetadataAttribute("EventGrid", 3)]
-		Eventgrid = 911620003,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
 		[OptionSetMetadataAttribute("HttpTriggered", 0)]
 		Httptriggered = 911620000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		[OptionSetMetadataAttribute("ServiceBus", 1)]
-		Servicebus = 911620001,
+		[OptionSetMetadataAttribute("ServiceBus Queue", 1)]
+		ServicebusQueue = 911620001,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		[OptionSetMetadataAttribute("TwoWay", 2)]
+		[OptionSetMetadataAttribute("Service Bus Topic", 2)]
+		ServiceBusTopic = 911620003,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		[OptionSetMetadataAttribute("TwoWay", 3)]
 		Twoway = 911620002,
 	}
 }

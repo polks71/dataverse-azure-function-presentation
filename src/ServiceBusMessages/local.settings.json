@@ -6,6 +6,8 @@
     "DataverseQueue": "dataversequeue",
     "ServiceBusQueueNameSpace__fullyQualifiedNamespace": "rjb-dv-az-presentation.servicebus.windows.net",
     "dataverseUrl": "checksecrets",
-    "expectedOrg": "orgdccf84be"
+    "expectedOrg": "orgdccf84be",
+    "TopicName": "dataversetopic",
+    "SubscriptionName": "dataversesubscription"
   }
 }

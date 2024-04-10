@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
-using DataverseAzureFunctionsCommon;
 using DataverseAzureFunctionsCommon.Dataverse.Model;
+using DataverseAzureFunctionsCommon;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Azure.WebJobs.ServiceBus;
@@ -15,19 +14,20 @@ using Microsoft.Xrm.Sdk;
 
 namespace ServiceBusMessages
 {
-    public class QueueMessage
+    public class TopicMessage
     {
+
         private readonly ServiceClient _serviceClient;
         private readonly IConfiguration _configuration;
 
-        public QueueMessage(IOrganizationService serviceClient, IConfiguration config)
+        public TopicMessage(IOrganizationService serviceClient, IConfiguration config)
         {
             _serviceClient = (ServiceClient)serviceClient;
             _configuration = config;
         }
 
-        [FunctionName("QueueMessage")]
-        public async Task Run([ServiceBusTrigger("%DataverseQueue%", Connection = "ServiceBusQueueNameSpace")]
+        [FunctionName("TopicMessage")]
+        public async Task Run([ServiceBusTrigger("%TopicName%", "%SubscriptionName%", Connection = "ServiceBusQueueNameSpace")] 
                 ServiceBusReceivedMessage message,
                 ServiceBusMessageActions messageActions,
                 ExecutionContext executionContext,
@@ -36,7 +36,7 @@ namespace ServiceBusMessages
             try
             {
                 log.LogInformation($"InvocationId: {executionContext.InvocationId} QueueMessage: {message.Body}");
-                //Validate the message is from the expected Dataverse Organization
+
                 if (message.ApplicationProperties.ContainsKey("http://schemas.microsoft.com/xrm/2011/Claims/Organization"))
                 {
                     var orgValue = (string)message.ApplicationProperties["http://schemas.microsoft.com/xrm/2011/Claims/Organization"];
@@ -95,10 +95,10 @@ namespace ServiceBusMessages
 
                 log.LogInformation($"Primary Entity {demoLog.LogicalName} {demoLog.RjB_Name} {demoLog.Id}");
                 //write back a date/time just to prove the function was triggered
-                if (demoLog.RjB_Type == RjB_TypeOfAzureFunction.ServicebusQueue)
+                if (demoLog.RjB_Type == RjB_TypeOfAzureFunction.ServiceBusTopic)
                 {
                     var addNote = new Annotation();
-                    addNote.NoteText = $"Service Bus Azure Queue Function Writing Back to the log record";
+                    addNote.NoteText = $"Service Bus Topic Azure Function Writing Back to the log record";
                     addNote.ObjectId = new EntityReference(RjB_DemoAzureFunctionLog.EntityLogicalName, remoteContext.PrimaryEntityId);
                     await _serviceClient.CreateAsync(addNote);
                     log.LogInformation("WriteBack Successful");
@@ -112,7 +112,6 @@ namespace ServiceBusMessages
                 await messageActions.AbandonMessageAsync(message);
                 throw;
             }
-            
         }
     }
 }
