@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "DataverseQueue": "dataversequeue",
+    "ServiceBusQueueNameSpace__fullyQualifiedNamespace": "rjb-dv-az-presentation.servicebus.windows.net",
+    "dataverseUrl": "checksecrets",
+    "expectedOrg": "orgdccf84be"
+  }
+}

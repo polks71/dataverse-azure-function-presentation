@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhook Message", "Webhook Message\Webhook Message.csproj", "{FFD21550-3A9C-4AF2-B4B5-962A0DED5783}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataverseAzureFunctionsCommon", "DataverseAzureFunctionsCommon\DataverseAzureFunctionsCommon.csproj", "{A730C978-2361-4047-875C-7B6D75EE0AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataverseAzureFunctionsCommon", "DataverseAzureFunctionsCommon\DataverseAzureFunctionsCommon.csproj", "{A730C978-2361-4047-875C-7B6D75EE0AD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusMessages", "ServiceBusMessages\ServiceBusMessages.csproj", "{6E1C1743-F49D-4DA7-96FA-C906B15FA071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A730C978-2361-4047-875C-7B6D75EE0AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A730C978-2361-4047-875C-7B6D75EE0AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A730C978-2361-4047-875C-7B6D75EE0AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E1C1743-F49D-4DA7-96FA-C906B15FA071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1C1743-F49D-4DA7-96FA-C906B15FA071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1C1743-F49D-4DA7-96FA-C906B15FA071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1C1743-F49D-4DA7-96FA-C906B15FA071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
