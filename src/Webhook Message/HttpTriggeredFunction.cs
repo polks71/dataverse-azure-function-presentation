@@ -32,19 +32,19 @@ namespace WebhookMessage
             HttpRequest req,
             FunctionContext executionContext)
         {
-            var log = _logger;
+            
             try
             {
                 var invocationId = "UnknownInvocationId";
                 if (executionContext != null)
                 {
-                    log.LogInformation($"Message received Context: {executionContext.InvocationId}");
+                    _logger.LogInformation($"Message received Context: {executionContext.InvocationId}");
                     invocationId = executionContext.InvocationId;
                 }
                 else
-                    log.LogWarning("Message Received but context is null");
+                    _logger.LogWarning("Message Received but context is null");
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                log.LogInformation($"InvocationID: {invocationId} Message body: {requestBody}");
+                _logger.LogInformation($"InvocationID: {invocationId} Message body: {requestBody}");
 
                 //check if the message is received from the correct org
                 StringValues headerValues;
@@ -53,24 +53,24 @@ namespace WebhookMessage
                     var org = headerValues.First().ToLower();
                     if (!org.Contains(_configuration.GetValue<string>("expectedOrg").ToLower()))
                     {
-                        _logger.LogWarning($"{org} is not the expected org {_configuration.GetValue<string>("expectedOrg")}");
+                        this._logger.LogWarning($"{org} is not the expected org {_configuration.GetValue<string>("expectedOrg")}");
                         return new UnauthorizedResult();
                     }
                     else
                     {
-                        log.LogInformation($"Expected Org {org} is correct");
+                        _logger.LogInformation($"Expected Org {org} is correct");
                     }
                 }
                 else
                 {
-                    log.LogWarning("Request with missing header.");
+                    _logger.LogWarning("Request with missing header.");
                     return new UnauthorizedResult();
                 }
                 //check if the message size exceeded to flag future operations
                 bool messageDataExeeded = false;
                 if (req.Headers.ContainsKey("x-ms-dynamics-msg-size-exceeded"))
                 {
-                    log.LogWarning("Message Data Exceeded");
+                    _logger.LogWarning("Message Data Exceeded");
                     messageDataExeeded = true;
                 }
 
@@ -88,7 +88,7 @@ namespace WebhookMessage
                         ))).ToEntity<RjB_DemoAzureFunctionLog>();
                 }
 
-                log.LogInformation($"Primary Entity {demoLog.LogicalName} {demoLog.RjB_Name} {demoLog.Id}");
+                _logger.LogInformation($"Primary Entity {demoLog.LogicalName} {demoLog.RjB_Name} {demoLog.Id}");
                 //write back a date/time just to prove the function was triggered
                 if (demoLog.RjB_Type == RjB_TypeOfAzureFunction.Httptriggered)
                 {
@@ -96,13 +96,13 @@ namespace WebhookMessage
                     addNote.NoteText = $"Azure Function Writing Back to the log record";
                     addNote.ObjectId = new EntityReference(RjB_DemoAzureFunctionLog.EntityLogicalName, remoteContext.PrimaryEntityId);
                     await _serviceClient.CreateAsync(addNote);
-                    log.LogInformation("WriteBack Successful");
+                    _logger.LogInformation("WriteBack Successful");
                 }
                 return new OkResult();
             }
             catch (Exception e)
             {
-                log.LogError(e, $"HttpTriggered Function Failed");
+                _logger.LogError(e, $"HttpTriggered Function Failed");
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }

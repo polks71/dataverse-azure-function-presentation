@@ -27,21 +27,23 @@ namespace TwoWayPluginDemo
                 var createReq = new CreateRequest() { Parameters = context.InputParameters };
                 var target = createReq.Target;
 
-                // TODO Test for an entity type and message supported by your plug-in.
+
                 if (context.PrimaryEntityName != "rjb_demoazurefunctionlog") { return; }
                 if (context.MessageName != "Create") { return; }
 
-                var endpointID = Guid.Parse(Shared.EnvironmentVariables.GetVariable(SERVICE_ENDPOINT_VAR_NAME, service, Trace));
-
-                IServiceEndpointNotificationService endpointService = (IServiceEndpointNotificationService)serviceProvider.GetService(typeof(IServiceEndpointNotificationService));
                 try
                 {
-                    Trace("Passing Context to Service Endpoint");
-                    string response = endpointService.Execute(new EntityReference("serviceendpoint", endpointID), context);
                     if (target.TryGetAttributeValue<OptionSetValue>("rjb_type", out OptionSetValue typeValue))
                     {
-                        if (typeValue.Value == 911620002)//TwoWay
+                        if (typeValue.Value == 911620002)//TwoWay Service Bus
                         {
+                            IServiceEndpointNotificationService endpointService = (IServiceEndpointNotificationService)serviceProvider.GetService(typeof(IServiceEndpointNotificationService));
+                            var endpointID = Guid.Parse(Shared.EnvironmentVariables.GetVariable(SERVICE_ENDPOINT_VAR_NAME, service, Trace));
+
+                            Trace("Passing Context to Service Endpoint");
+                            string response = endpointService.Execute(new EntityReference("serviceendpoint", endpointID), context);
+
+
                             if (!String.IsNullOrEmpty(response))
                             {
                                 var newNote = new Entity("annotation");
@@ -54,8 +56,9 @@ namespace TwoWayPluginDemo
                         }
                         else
                         {
-                            Trace("Type is not TwoWay");
+                            Trace($"Type is not TwoWay Service Bus {typeValue.Value}");
                         }
+
                     }
                     else
                     {

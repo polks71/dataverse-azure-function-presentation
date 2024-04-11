@@ -29,8 +29,12 @@ namespace DataverseAzureFunctionsCommon.Dataverse.Model
 		ServiceBusTopic = 911620003,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		[OptionSetMetadataAttribute("TwoWay", 3)]
-		Twoway = 911620002,
+		[OptionSetMetadataAttribute("TwoWay Http", 4)]
+		TwowayHttp = 911620004,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		[OptionSetMetadataAttribute("TwoWay ServiceBus", 3)]
+		TwowayServicebus = 911620002,
 	}
 }
 #pragma warning restore CS1591
