@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusMessages", "Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoWayPluginDemo", "TwoWayPluginDemo\TwoWayPluginDemo.csproj", "{873820AD-34AC-42DD-9119-DDE4A1D4ABF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoWayListener", "TwoWayListener\TwoWayListener.csproj", "{9788C14A-39CB-47E4-8545-4CDE82F74311}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{873820AD-34AC-42DD-9119-DDE4A1D4ABF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{873820AD-34AC-42DD-9119-DDE4A1D4ABF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{873820AD-34AC-42DD-9119-DDE4A1D4ABF8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9788C14A-39CB-47E4-8545-4CDE82F74311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9788C14A-39CB-47E4-8545-4CDE82F74311}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9788C14A-39CB-47E4-8545-4CDE82F74311}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9788C14A-39CB-47E4-8545-4CDE82F74311}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
