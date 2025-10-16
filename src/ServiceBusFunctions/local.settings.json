@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "DataverseQueue": "dataversequeue",
+    "ServiceBusQueueNameSpace__fullyQualifiedNamespace": "rjb-azurefunctionspresentation.servicebus.windows.net",
+    "dataverseUrl": "https://org1c8cf872.crm.dynamics.com/",
+    "expectedOrg": "org1c8cf872",
+    "TopicName": "dataversetopic",
+    "SubscriptionName": "dataversesubscription"
+  }
+}
