@@ -7,6 +7,6 @@
     "tenantid": "check secrets",
     "registeredappsecret": "check secrets",
     "dataverseUrl": "checksecrets",
-    "expectedOrg": "orgdccf84be"
+    "expectedOrg": "org1c8cf872"
   }
 }
